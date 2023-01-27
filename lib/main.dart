@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 void main() => runApp(const MyApp());
 
@@ -51,6 +52,7 @@ class CalculatorState extends State<Calculator> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 80, vertical: 48.0),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter total hours',
@@ -71,6 +73,10 @@ class CalculatorState extends State<Calculator> {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 80),
                   child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter wage per hour',
