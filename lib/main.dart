@@ -31,7 +31,6 @@ class Calculator extends StatefulWidget {
 
 class CalculatorState extends State<Calculator> {
   final _formKey = GlobalKey<FormState>();
-  RegExp regexp = RegExp(r'^[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$');
   double numberOfHours = 0;
   double hoursRate = 0;
   double regularPay = 0;
@@ -52,7 +51,12 @@ class CalculatorState extends State<Calculator> {
                   padding: const EdgeInsets.symmetric(
                       horizontal: 80, vertical: 48.0),
                   child: TextFormField(
-                    keyboardType: TextInputType.number,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^[a-zA-Z0-9]*\.?[a-zA-Z0-9]*$')),
+                    ],
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
                       hintText: 'Enter total hours',
@@ -60,9 +64,6 @@ class CalculatorState extends State<Calculator> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter number of hours';
-                      }
-                      if (!regexp.hasMatch(value)) {
-                        return 'Enter Valid Number';
                       }
                       return null;
                     },
@@ -73,9 +74,11 @@ class CalculatorState extends State<Calculator> {
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 80),
                   child: TextFormField(
-                    keyboardType: TextInputType.number,
+                    keyboardType:
+                        TextInputType.numberWithOptions(decimal: true),
                     inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
+                      FilteringTextInputFormatter.allow(
+                          RegExp(r'^[a-zA-Z0-9]*\.?[a-zA-Z0-9]*$')),
                     ],
                     decoration: const InputDecoration(
                       border: OutlineInputBorder(),
@@ -84,9 +87,6 @@ class CalculatorState extends State<Calculator> {
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter hourly rate';
-                      }
-                      if (!regexp.hasMatch(value)) {
-                        return 'Enter Valid Number';
                       }
                       return null;
                     },
