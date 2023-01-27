@@ -37,7 +37,6 @@ class CalculatorState extends State<Calculator> {
   double overtimePay = 0;
   double totalPay = 0;
   double taxAmount = 0;
-  double doublevalue = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
